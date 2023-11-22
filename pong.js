@@ -5,70 +5,74 @@ const jugador1 = document.getElementById("jugador1");
         const puntuacion2Text = document.getElementById("puntuacion2");
 
         let pelotaX = 395;
-        let pelotaY = 195;
-        let velocidadPelotaX = 2;
-        let velocidadPelotaY = 2;
-        let radioPelota = 10;
-        let jugador1Y = 150;
-        let jugador2Y = 150;
-        let puntuacion1 = 0;
-        let puntuacion2 = 0;
+let pelotaY = 195;
+let velocidadPelotaX = 2;
+let velocidadPelotaY = 2;
+let radioPelota = 10;
+let jugador1Y = 150;
+let jugador2Y = 150;
+let puntuacion1 = 0;
+let puntuacion2 = 0;
 
-        document.addEventListener("keydown", function (evento) {
-            if (evento.key === "w" && jugador1Y > 0) {
-                jugador1Y -= 10;
-                jugador1.setAttribute("y", jugador1Y);
-            } else if (evento.key === "s" && jugador1Y + 100 < 400) {
-                jugador1Y += 10;
-                jugador1.setAttribute("y", jugador1Y);
-            }
-        });
+document.addEventListener("keydown", function (evento) {
+    if (evento.key === "w" && jugador1Y > 0) {
+        jugador1Y -= 15;
+        jugador1.setAttribute("y", jugador1Y);
+    } else if (evento.key === "s" && jugador1Y + 100 < 400) {
+        jugador1Y += 15;
+        jugador1.setAttribute("y", jugador1Y);
+    }
+});
 
-        document.addEventListener("keydown", function (evento) {
-            if (evento.key === "ArrowUp" && jugador2Y > 0) {
-                jugador2Y -= 10;
-                jugador2.setAttribute("y", jugador2Y);
-            } else if (evento.key === "ArrowDown" && jugador2Y + 100 < 400) {
-                jugador2Y += 10;
-                jugador2.setAttribute("y", jugador2Y);
-            }
-        });
+document.addEventListener("keydown", function (evento) {
+    if (evento.key === "ArrowUp" && jugador2Y > 0) {
+        jugador2Y -= 15;
+        jugador2.setAttribute("y", jugador2Y);
+    } else if (evento.key === "ArrowDown" && jugador2Y + 100 < 400) {
+        jugador2Y += 15;
+        jugador2.setAttribute("y", jugador2Y);
+    }
+});
 
-        function MoverPelota() {
-            pelotaX += velocidadPelotaX;
-            pelotaY += velocidadPelotaY;
+function MoverPelota() {
+    pelotaX += velocidadPelotaX;
+    pelotaY += velocidadPelotaY;
 
-            pelota.setAttribute("cx", pelotaX);
-            pelota.setAttribute("cy", pelotaY);
+    pelota.setAttribute("cx", pelotaX);
+    pelota.setAttribute("cy", pelotaY);
 
-            if (pelotaY <= 0 || pelotaY >= 390) {
-                velocidadPelotaY = -velocidadPelotaY;
-            }
+    if (pelotaY <= 0 || pelotaY >= 390) {
+        velocidadPelotaY = -velocidadPelotaY;
+    }
 
-            if ((pelotaX - radioPelota) <= 20 && (pelotaY >= jugador1Y && pelotaY <= jugador1Y + 100)) {
-                velocidadPelotaX = -velocidadPelotaX;
-                puntuacion2++;
-                puntuacion2Text.textContent = "Puntuación Jugador 2: " + puntuacion2;
-                
-            } else if ((pelotaX + radioPelota) >= 780 && (pelotaY >= jugador2Y && pelotaY <= jugador2Y + 100)) {
-                velocidadPelotaX = -velocidadPelotaX;
-                
-                puntuacion1++;
-                puntuacion1Text.textContent = "Puntuación Jugador 1: " + puntuacion1;
-            }
+    if ((pelotaX - radioPelota) <= 20 && (pelotaY >= jugador1Y && pelotaY <= jugador1Y + 100)) {
+        velocidadPelotaX = -velocidadPelotaX;
+        
+    } else if ((pelotaX + radioPelota) >= 780 && (pelotaY >= jugador2Y && pelotaY <= jugador2Y + 100)) {
+        velocidadPelotaX = -velocidadPelotaX;
+        
+    } else if (pelotaX <= 0) {
+        puntuacion2 += 1;
+        puntuacion2Text.textContent = "Puntuación Jugador 2: " + puntuacion2;
+        resetearPelota();
+    } else if (pelotaX >= 790) {
+        puntuacion1 += 1;
+        puntuacion1Text.textContent = "Puntuación Jugador 1: " + puntuacion1;
+        resetearPelota();
+    }
 
-            if (pelotaX <= 0 || pelotaX >= 790) {
-                pelotaX = 400;
-                pelotaY = 200;
-                velocidadPelotaX = 2;
-                velocidadPelotaY = 2;
-            }
+    requestAnimationFrame(Bucle);
+}
 
-            requestAnimationFrame(Bucle);
-        }
+function resetearPelota() {
+    pelotaX = 400;
+    pelotaY = 200;
+    velocidadPelotaX = 2;
+    velocidadPelotaY = 2;
+}
 
-        function Bucle() {
-            MoverPelota();
-        }
+function Bucle() {
+    MoverPelota();
+}
 
-        Bucle();
+Bucle();
