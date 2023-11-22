@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Pong</title>
+    <link rel="stylesheet" type="text/css" href="pong.css">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        svg {
+            border: 2px solid #fff;
+            background-color: #000;
+        }
+
+        #jugador1,
+        #jugador2 {
+            fill: #fff;
+        }
+
+        #pelota {
+            fill: #fff;
+        }
+        svg{
+            border:solid black;
+        }
+    </style>
+</head>
+<body>
+    
+    <svg id="juego" width="800" height="400">
+        <rect id="jugador1" x="10" y="150" width="10" height="100" fill="white"></rect>
+        <rect id="jugador2" x="780" y="150" width="10" height="100" fill="white"></rect>
+        <circle id="pelota" cx="400" cy="200" r="10" fill="white" />
+        <text id="puntuacion1" x="100" y="30" font-size="20" fill="white">Puntuación Jugador 1: 0</text>
+        <text id="puntuacion2" x="600" y="30" font-size="20" fill="white">Puntuación Jugador 2: 0</text>
+    </svg>
+
+    <script src="pong.js">
+        
+    </script>
+</body>
+</html>
